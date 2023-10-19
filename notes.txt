@@ -1,0 +1,76 @@
+/* //base middleware
+app.use((request, responce, next) => {
+  console.log(`base middleware work`);
+  next();
+});
+
+// "/" base url api
+app.get("/", (request, responce) => {
+  responce
+    .send({
+      type: "GET",
+      message: "welcome to BE",
+    })
+    .status(200);
+});
+
+//user middleware
+app.use(async (request, responce, next) => {
+  console.log(`users middleware work`);
+  next();
+});
+
+// "/users" api
+app.get("/users", (request, responce) => {
+  const data = [
+    {
+      id: 1,
+      name: "ali",
+    },
+    {
+      id: 2,
+      name: "alina",
+    },
+    {
+      id: 3,
+      name: "aliza",
+    },
+  ];
+  responce.send(data);
+});
+
+const usersData = [
+  {
+    id: 1,
+    name: "ali",
+  },
+  {
+    id: 2,
+    name: "alina",
+  },
+  {
+    id: 3,
+    name: "aliza",
+  },
+];
+// form data post api
+app.post("/form-data", async (resquest, responce) => {
+  try {
+    const data = await resquest.body;
+    if (!data.id || !data.name) {
+      throw new Error("data not found");
+    }
+    const allData = Object.assign([], usersData);
+    allData.push(data);
+
+    responce.json({
+      message: "data recived",
+      data: allData,
+    });
+  } catch (error) {
+    responce.json({
+      message: error.message,
+    });
+  }
+});
+ */s
